@@ -10,5 +10,10 @@ namespace ProyectoPractica
     {
         public int IdEstilo { get; set; }
         public string Descripcion { get; set; }
+
+        public override string ToString()
+        {
+            return Descripcion;
+        }
     }
 }

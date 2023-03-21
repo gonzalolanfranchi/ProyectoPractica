@@ -23,6 +23,8 @@ namespace ProyectoPractica
             DiscoService service = new DiscoService();
             listaDisco = service.listar();
             dgvDiscos.DataSource = listaDisco;
+            dgvDiscos.Columns["IdDisco"].Visible = false;
+            dgvDiscos.Columns["UrlImagenTapa"].Visible = false;
             cargarImagen(listaDisco[0].UrlImagenTapa);
             
         }
