@@ -1,6 +1,6 @@
 ﻿namespace ProyectoPractica
 {
-    partial class Form1
+    partial class frmDiscos
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvDiscos = new System.Windows.Forms.DataGridView();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pbxDisco = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxDisco)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvDiscos
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 54);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(533, 231);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvDiscos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDiscos.Location = new System.Drawing.Point(19, 54);
+            this.dgvDiscos.Name = "dgvDiscos";
+            this.dgvDiscos.Size = new System.Drawing.Size(533, 231);
+            this.dgvDiscos.TabIndex = 0;
+            this.dgvDiscos.SelectionChanged += new System.EventHandler(this.dgvDiscos_SelectionChanged);
             // 
             // lblTitulo
             // 
@@ -53,28 +54,30 @@
             this.lblTitulo.TabIndex = 1;
             this.lblTitulo.Text = "Repositorio de Discos";
             // 
-            // pictureBox1
+            // pbxDisco
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(571, 54);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(231, 231);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.pbxDisco.Location = new System.Drawing.Point(571, 54);
+            this.pbxDisco.Name = "pbxDisco";
+            this.pbxDisco.Size = new System.Drawing.Size(231, 231);
+            this.pbxDisco.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxDisco.TabIndex = 2;
+            this.pbxDisco.TabStop = false;
             // 
-            // Form1
+            // frmDiscos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 305);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbxDisco);
             this.Controls.Add(this.lblTitulo);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvDiscos);
             this.MinimumSize = new System.Drawing.Size(840, 344);
-            this.Name = "Form1";
+            this.Name = "frmDiscos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Repositorio de Discos";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Load += new System.EventHandler(this.frmDiscos_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxDisco)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,9 +85,9 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvDiscos;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbxDisco;
     }
 }
 

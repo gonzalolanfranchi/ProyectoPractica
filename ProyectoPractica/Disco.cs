@@ -13,7 +13,6 @@ namespace ProyectoPractica
         public DateTime FechaLanzamiento { get; set; }
         public int CantidadCanciones { get; set; }
         public string UrlImagenTapa { get; set; }
-        public int IdEstilo { get; set; }
-        public int IdEdicion { get; set; }
+
     }
 }
