@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProyectoPractica
+namespace dominio
 {
-    internal class TipoEdicion
+    public class TipoEdicion
     {
         public int IdTipoEdicion { get; set; }
         public string Descripcion { get; set; }

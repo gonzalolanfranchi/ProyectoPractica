@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using dominio;
+using services;
 
 namespace ProyectoPractica
 {
@@ -20,20 +22,19 @@ namespace ProyectoPractica
 
         private void frmDiscos_Load(object sender, EventArgs e)
         {
-            DiscoService service = new DiscoService();
-            listaDisco = service.listar();
-            dgvDiscos.DataSource = listaDisco;
+            cargar();
+        }
+
+        private void ocultarColumnas()
+        {
             dgvDiscos.Columns["IdDisco"].Visible = false;
             dgvDiscos.Columns["UrlImagenTapa"].Visible = false;
-            cargarImagen(listaDisco[0].UrlImagenTapa);
-            
         }
 
         private void dgvDiscos_SelectionChanged(object sender, EventArgs e)
         {
             Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.UrlImagenTapa);
-            
+            cargarImagen(seleccionado.UrlImagenTapa);  
         }
 
         private void cargarImagen(string imagen)
@@ -48,6 +49,30 @@ namespace ProyectoPractica
 
                 pbxDisco.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png");
             }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmNuevoDisco alta = new frmNuevoDisco();
+            alta.ShowDialog();
+
+        }
+
+        private void cargar()
+        {
+        DiscoService service = new DiscoService();
+            try
+            {
+                listaDisco = service.listar();
+                dgvDiscos.DataSource = listaDisco;
+                ocultarColumnas();
+                cargarImagen(listaDisco[0].UrlImagenTapa);           
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
     }
 }

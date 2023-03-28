@@ -46,20 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Disco.cs" />
-    <Compile Include="DiscoService.cs" />
-    <Compile Include="Estilo.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="frmDiscos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmDiscos.Designer.cs">
+      <DependentUpon>frmDiscos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNuevoDisco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNuevoDisco.Designer.cs">
+      <DependentUpon>frmNuevoDisco.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TipoEdicion.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="frmDiscos.resx">
+      <DependentUpon>frmDiscos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevoDisco.resx">
+      <DependentUpon>frmNuevoDisco.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -82,6 +87,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\dominio\dominio.csproj">
+      <Project>{86218b83-d8c7-457d-92cb-5977b8353c12}</Project>
+      <Name>dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\services\services.csproj">
+      <Project>{1ec7fe29-d386-40df-85f7-89f9b260dfdd}</Project>
+      <Name>services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
