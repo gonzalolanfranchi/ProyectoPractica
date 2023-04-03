@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using dominio;
 using System.Security.Cryptography.X509Certificates;
+using System.Net.Configuration;
 
 namespace services
 {
@@ -22,7 +23,7 @@ namespace services
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=DISCOS_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select D.Titulo, D.FechaLanzamiento, D.CantidadCanciones, D.UrlImagenTapa, E.Descripcion Genero, TE.Descripcion Formato From DISCOS D, ESTILOS E, TIPOSEDICION TE Where D.IdEstilo = E.Id AND TE.Id = D.IdTipoEdicion";
+                comando.CommandText = "Select D.Id, D.Titulo, D.FechaLanzamiento, D.CantidadCanciones, D.UrlImagenTapa, E.Descripcion Genero, TE.Descripcion Formato, D.IdEstilo, D.IdTipoEdicion From DISCOS D, ESTILOS E, TIPOSEDICION TE Where D.IdEstilo = E.Id AND TE.Id = D.IdTipoEdicion";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -31,26 +32,26 @@ namespace services
                 while (lector.Read())
                 {
                     Disco aux = new Disco();
+                    aux.IdDisco = (int)lector["Id"];
                     aux.Titulo = (string)lector["Titulo"];
                     aux.FechaLanzamiento = (DateTime)lector["FechaLanzamiento"];
                     aux.CantidadCanciones = (int)lector["CantidadCanciones"];
                     aux.UrlImagenTapa = (string)lector["UrlImagenTapa"];
                     aux.Genero = new Estilo();
+                    aux.Genero.IdEstilo = (int)lector["IdEstilo"];
                     aux.Genero.Descripcion = (string)lector["Genero"];
                     aux.Formato = new TipoEdicion();
+                    aux.Formato.IdTipoEdicion = (int)lector["IdTipoEdicion"];
                     aux.Formato.Descripcion = (string)lector["Formato"];
 
                     lista.Add(aux);
 
-
                 }
-
 
                 return lista;
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -108,6 +109,22 @@ namespace services
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setearConsulta("Delete from DISCOS where id = @id");
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
 

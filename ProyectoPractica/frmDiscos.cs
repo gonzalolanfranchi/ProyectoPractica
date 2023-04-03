@@ -20,6 +20,8 @@ namespace ProyectoPractica
             InitializeComponent();
         }
 
+
+
         private void frmDiscos_Load(object sender, EventArgs e)
         {
             cargar();
@@ -55,6 +57,7 @@ namespace ProyectoPractica
         {
             frmNuevoDisco alta = new frmNuevoDisco();
             alta.ShowDialog();
+            cargar();
 
         }
 
@@ -73,6 +76,38 @@ namespace ProyectoPractica
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Disco seleccionado;
+            seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+
+            frmNuevoDisco modificar = new frmNuevoDisco(seleccionado);
+            modificar.ShowDialog();
+            cargar();
+
+        }
+
+        private void btnEliminarFisico_Click(object sender, EventArgs e)
+        {
+            DiscoService service = new DiscoService();
+            Disco seleccionado;
+            try
+            {
+                DialogResult respuesta = MessageBox.Show("Esta seguro que desea eliminar el disco permanentemente?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (respuesta == DialogResult.Yes)
+                {
+                    seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                    service.eliminar(seleccionado.IdDisco);
+                    cargar();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

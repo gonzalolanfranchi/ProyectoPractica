@@ -128,6 +128,7 @@
             this.tbxUrlImagen.Name = "tbxUrlImagen";
             this.tbxUrlImagen.Size = new System.Drawing.Size(200, 20);
             this.tbxUrlImagen.TabIndex = 9;
+            this.tbxUrlImagen.Leave += new System.EventHandler(this.tbxUrlImagen_Leave);
             // 
             // cboGenero
             // 
@@ -150,6 +151,7 @@
             this.pbxImagen.Location = new System.Drawing.Point(362, 49);
             this.pbxImagen.Name = "pbxImagen";
             this.pbxImagen.Size = new System.Drawing.Size(231, 231);
+            this.pbxImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxImagen.TabIndex = 12;
             this.pbxImagen.TabStop = false;
             // 

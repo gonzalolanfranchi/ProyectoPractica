@@ -22,6 +22,13 @@ namespace ProyectoPractica
             InitializeComponent();
         }
 
+        public frmNuevoDisco(Disco disco)
+        {
+            InitializeComponent();
+            this.disco = disco;
+            Text = "Modificar Disco";
+        }
+
 
 
 
@@ -57,6 +64,9 @@ namespace ProyectoPractica
                     negocio.agregar(disco);
                     MessageBox.Show("Agregado exitosamente!");
                 }
+
+                
+
                 Close();
 
 
@@ -109,6 +119,11 @@ namespace ProyectoPractica
             {
                 pbxImagen.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png");
             }
+        }
+
+        private void tbxUrlImagen_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(tbxUrlImagen.Text);
         }
     }
 }
