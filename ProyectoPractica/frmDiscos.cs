@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -91,23 +92,38 @@ namespace ProyectoPractica
 
         private void btnEliminarFisico_Click(object sender, EventArgs e)
         {
+            eliminar();
+        }
+
+        private void btnEliminarLogico_Click(object sender, EventArgs e)
+        {
+            eliminar(true);
+        }
+
+        private void eliminar(bool logico = false)
+        {
             DiscoService service = new DiscoService();
             Disco seleccionado;
             try
             {
-                DialogResult respuesta = MessageBox.Show("Esta seguro que desea eliminar el disco permanentemente?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult respuesta = MessageBox.Show("Esta seguro que desea eliminar el disco?", "Eliminando", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (respuesta == DialogResult.Yes)
                 {
                     seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-                    service.eliminar(seleccionado.IdDisco);
+
+                    if (logico)
+                        service.eliminarLogico(seleccionado.IdDisco);
+                    else
+                        service.eliminar(seleccionado.IdDisco);
+
                     cargar();
                 }
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
+
         }
     }
 }
