@@ -29,12 +29,15 @@
         private void InitializeComponent()
         {
             this.dgvDiscos = new System.Windows.Forms.DataGridView();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.pbxDisco = new System.Windows.Forms.PictureBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminarFisico = new System.Windows.Forms.Button();
             this.btnEliminarLogico = new System.Windows.Forms.Button();
+            this.lblFiltro = new System.Windows.Forms.Label();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.btnResetear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxDisco)).BeginInit();
             this.SuspendLayout();
@@ -49,16 +52,6 @@
             this.dgvDiscos.Size = new System.Drawing.Size(533, 231);
             this.dgvDiscos.TabIndex = 0;
             this.dgvDiscos.SelectionChanged += new System.EventHandler(this.dgvDiscos_SelectionChanged);
-            // 
-            // lblTitulo
-            // 
-            this.lblTitulo.AutoSize = true;
-            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(12, 9);
-            this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(403, 42);
-            this.lblTitulo.TabIndex = 1;
-            this.lblTitulo.Text = "Repositorio de Discos";
             // 
             // pbxDisco
             // 
@@ -109,17 +102,56 @@
             this.btnEliminarLogico.UseVisualStyleBackColor = true;
             this.btnEliminarLogico.Click += new System.EventHandler(this.btnEliminarLogico_Click);
             // 
+            // lblFiltro
+            // 
+            this.lblFiltro.AutoSize = true;
+            this.lblFiltro.Location = new System.Drawing.Point(19, 22);
+            this.lblFiltro.Name = "lblFiltro";
+            this.lblFiltro.Size = new System.Drawing.Size(29, 13);
+            this.lblFiltro.TabIndex = 7;
+            this.lblFiltro.Text = "Filtro";
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(54, 19);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(180, 20);
+            this.txtFiltro.TabIndex = 8;
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Location = new System.Drawing.Point(240, 17);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
+            this.btnFiltrar.TabIndex = 9;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // btnResetear
+            // 
+            this.btnResetear.Location = new System.Drawing.Point(321, 17);
+            this.btnResetear.Name = "btnResetear";
+            this.btnResetear.Size = new System.Drawing.Size(75, 23);
+            this.btnResetear.TabIndex = 10;
+            this.btnResetear.Text = "Resetear";
+            this.btnResetear.UseVisualStyleBackColor = true;
+            this.btnResetear.Click += new System.EventHandler(this.btnResetear_Click);
+            // 
             // frmDiscos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 338);
+            this.Controls.Add(this.btnResetear);
+            this.Controls.Add(this.btnFiltrar);
+            this.Controls.Add(this.txtFiltro);
+            this.Controls.Add(this.lblFiltro);
             this.Controls.Add(this.btnEliminarLogico);
             this.Controls.Add(this.btnEliminarFisico);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.pbxDisco);
-            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.dgvDiscos);
             this.MinimumSize = new System.Drawing.Size(840, 344);
             this.Name = "frmDiscos";
@@ -136,12 +168,15 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvDiscos;
-        private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.PictureBox pbxDisco;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminarFisico;
         private System.Windows.Forms.Button btnEliminarLogico;
+        private System.Windows.Forms.Label lblFiltro;
+        private System.Windows.Forms.TextBox txtFiltro;
+        private System.Windows.Forms.Button btnFiltrar;
+        private System.Windows.Forms.Button btnResetear;
     }
 }
 

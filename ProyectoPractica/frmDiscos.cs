@@ -36,8 +36,11 @@ namespace ProyectoPractica
 
         private void dgvDiscos_SelectionChanged(object sender, EventArgs e)
         {
-            Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.UrlImagenTapa);  
+            if(dgvDiscos.CurrentRow != null)
+            {
+                Disco seleccionado = (Disco)dgvDiscos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.UrlImagenTapa);  
+            }
         }
 
         private void cargarImagen(string imagen)
@@ -123,6 +126,36 @@ namespace ProyectoPractica
             {
                 MessageBox.Show(ex.ToString());
             }
+
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            filtrar(txtFiltro.Text);
+        }
+
+        private void btnResetear_Click(object sender, EventArgs e)
+        {
+            filtrar("");
+        }
+
+        private void filtrar(string filtro)
+        {
+            List<Disco> listaFiltrada;
+            
+
+            if(filtro != "")
+            {
+                listaFiltrada = listaDisco.FindAll(x => x.Titulo.ToLower().Contains(filtro.ToLower()) || x.Genero.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaDisco;
+            }
+
+            dgvDiscos.DataSource = null;
+            dgvDiscos.DataSource = listaFiltrada;
+            ocultarColumnas();
 
         }
     }

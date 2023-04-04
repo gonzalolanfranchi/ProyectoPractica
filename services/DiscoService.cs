@@ -45,7 +45,6 @@ namespace services
                     aux.Formato.Descripcion = (string)lector["Formato"];
 
                     lista.Add(aux);
-
                 }
 
                 return lista;
@@ -58,7 +57,6 @@ namespace services
             {
                 conexion.Close();
             }
-
         }
 
         public void agregar(Disco nuevo)
