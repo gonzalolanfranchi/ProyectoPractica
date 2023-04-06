@@ -156,7 +156,11 @@ namespace ProyectoPractica
             dgvDiscos.DataSource = null;
             dgvDiscos.DataSource = listaFiltrada;
             ocultarColumnas();
+        }
 
+        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            filtrar(txtFiltro.Text);
         }
     }
 }
