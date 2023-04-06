@@ -140,9 +140,116 @@ namespace services
             }
         }
 
+        public List<Disco> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Disco> lista = new List<Disco>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = "Select D.Id, D.Titulo, D.FechaLanzamiento, D.CantidadCanciones, D.UrlImagenTapa, E.Descripcion Genero, TE.Descripcion Formato, D.IdEstilo, D.IdTipoEdicion From DISCOS D, ESTILOS E, TIPOSEDICION TE Where D.IdEstilo = E.Id AND TE.Id = D.IdTipoEdicion AND D.Activo = 1 AND ";
+
+                switch (campo)
+                {
+                    case "Cantidad de canciones":
+                        switch (criterio)
+                        {
+                            case "Mayor que":
+                                consulta += "D.CantidadCanciones > " + filtro;
+                                break;
+
+                            case "Menor que":
+                                consulta += "D.CantidadCanciones < " + filtro;
+                                break;
+
+                            default:
+                                consulta += "D.CantidadCanciones = " + filtro;
+                                break;
+                        }
+                        break;
+
+                    case "Genero":
+                        switch (criterio)
+                        {
+                            case "Contiene":
+                                consulta += "E.Descripcion like '%" + filtro + "%'";
+                                break;
+
+                            case "Termina con":
+                                consulta += "E.Descripcion like '%" + filtro + "'";
+                                break;
+
+                            default: //Empieza con
+                                consulta += "E.Descripcion like '" + filtro + "%'";
+                                break;
+                        }
+                        break;
+
+                    case "Formato":
+                        switch (criterio)
+                        {
+                            case "Contiene":
+                                consulta += "TE.Descripcion like '%" + filtro + "%'";
+                                break;
+
+                            case "Termina con":
+                                consulta += "TE.Descripcion like '%" + filtro + "'";
+                                break;
+
+                            default: //Empieza con
+                                consulta += "TE.Descripcion like '" + filtro + "%'";
+                                break;
+                        }
+                        break;
+
+                    default: // nombre
+                        switch (criterio)
+                        {
+                            case "Contiene":
+                                consulta += "D.Titulo like '%" + filtro + "%'";
+                                break;
+
+                            case "Termina con":
+                                consulta += "D.Titulo like '%" + filtro + "'";
+                                break;
+
+                            default: //Empieza con
+                                consulta += "D.Titulo like '" + filtro + "%'";
+                                break;
+                        }
+                        break;
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Disco aux = new Disco();
+                    aux.IdDisco = (int)datos.Lector["Id"];
+                    aux.Titulo = (string)datos.Lector["Titulo"];
+                    aux.FechaLanzamiento = (DateTime)datos.Lector["FechaLanzamiento"];
+                    aux.CantidadCanciones = (int)datos.Lector["CantidadCanciones"];
+                    aux.UrlImagenTapa = (string)datos.Lector["UrlImagenTapa"];
+                    aux.Genero = new Estilo();
+                    aux.Genero.IdEstilo = (int)datos.Lector["IdEstilo"];
+                    aux.Genero.Descripcion = (string)datos.Lector["Genero"];
+                    aux.Formato = new TipoEdicion();
+                    aux.Formato.IdTipoEdicion = (int)datos.Lector["IdTipoEdicion"];
+                    aux.Formato.Descripcion = (string)datos.Lector["Formato"];
+
+                    lista.Add(aux);
+                }
 
 
+                return lista;
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+        }
     }
 }
 

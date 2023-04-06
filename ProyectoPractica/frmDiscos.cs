@@ -26,6 +26,10 @@ namespace ProyectoPractica
         private void frmDiscos_Load(object sender, EventArgs e)
         {
             cargar();
+            cboCampo.Items.Add("Cantidad de canciones");
+            cboCampo.Items.Add("Genero");
+            cboCampo.Items.Add("Formato");
+            cboCampo.Items.Add("Nombre");
         }
 
         private void ocultarColumnas()
@@ -131,7 +135,20 @@ namespace ProyectoPractica
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            filtrar(txtFiltro.Text);
+            DiscoService service = new DiscoService();
+            try
+            {
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvDiscos.DataSource = service.filtrar(campo, criterio, filtro);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+
         }
 
         private void btnResetear_Click(object sender, EventArgs e)
@@ -161,6 +178,28 @@ namespace ProyectoPractica
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
             filtrar(txtFiltro.Text);
+        }
+
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string opcion = cboCampo.SelectedItem.ToString();
+            if (opcion == "Cantidad de canciones")
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Menor que");
+                cboCriterio.Items.Add("Igual que");
+                cboCriterio.Items.Add("Mayor que");
+                cboCriterio.SelectedItem = "Igual que";
+            }
+            else
+            {
+                cboCriterio.Items.Clear();
+                cboCriterio.Items.Add("Comienza con");
+                cboCriterio.Items.Add("Termina con");
+                cboCriterio.Items.Add("Contiene");
+                cboCriterio.SelectedItem = "Comienza con";
+            }
+
         }
     }
 }
