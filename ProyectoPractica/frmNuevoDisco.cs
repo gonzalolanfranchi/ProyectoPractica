@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -124,6 +125,20 @@ namespace ProyectoPractica
         private void tbxUrlImagen_Leave(object sender, EventArgs e)
         {
             cargarImagen(tbxUrlImagen.Text);
+        }
+
+        private void btnAgregarImagen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*jpg";
+            if (archivo.ShowDialog() == DialogResult.OK)
+            {
+                tbxUrlImagen.Text = archivo.FileName;
+                cargarImagen(archivo.FileName);
+
+                //guardar imagen
+                File.Copy(archivo.FileName, "C:");
+            }
         }
     }
 }
