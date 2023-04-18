@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using services;
+using System.Configuration;
 
 namespace ProyectoPractica
 {
     public partial class frmNuevoDisco : Form
     {
         private Disco disco = null;
+        private OpenFileDialog archivo = null;
 
         public frmNuevoDisco()
         {
@@ -55,6 +57,13 @@ namespace ProyectoPractica
                 disco.Genero = (Estilo)cboGenero.SelectedItem;
                 disco.Formato = (TipoEdicion)cboFormato.SelectedItem;
 
+                //Guardo imagen si la levanto localmente
+                if(archivo != null && !(tbxUrlImagen.Text.ToUpper().Contains("HTTP")))
+                {
+                    File.Copy(archivo.FileName, ConfigurationManager.AppSettings["imagenes"] + archivo.SafeFileName);
+                    disco.UrlImagenTapa = ConfigurationManager.AppSettings["imagenes"] + archivo.SafeFileName;
+                }    
+                
                 if (disco.IdDisco != 0)
                 {
                     negocio.modificar(disco);
@@ -129,15 +138,15 @@ namespace ProyectoPractica
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
         {
-            OpenFileDialog archivo = new OpenFileDialog();
-            archivo.Filter = "jpg|*jpg";
+            archivo = new OpenFileDialog();
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
             if (archivo.ShowDialog() == DialogResult.OK)
             {
                 tbxUrlImagen.Text = archivo.FileName;
                 cargarImagen(archivo.FileName);
 
                 //guardar imagen
-                File.Copy(archivo.FileName, "C:");
+                //File.Copy(archivo.FileName, ConfigurationManager.AppSettings["imagenes"] + archivo.SafeFileName);
             }
         }
     }
